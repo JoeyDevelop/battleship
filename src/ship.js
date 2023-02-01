@@ -1,4 +1,4 @@
-function createShip(length, name) {
+function Ship(length, name) {
   return {
     name: name,
     length: length,
@@ -15,4 +15,4 @@ function createShip(length, name) {
     },
   };
 }
-export default createShip;
+export default Ship;
