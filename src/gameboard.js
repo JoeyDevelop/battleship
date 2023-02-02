@@ -85,6 +85,16 @@ class gameBoard {
       return "Miss!";
     }
   }
+
+  getMissedAttacks() {
+    // return this.missedAttacks;
+    let missedAttacks = [];
+    this.missedAttacks.forEach((miss) => {
+      const coord = { row: miss.row[0], col: miss.col };
+      missedAttacks.push(coord);
+    });
+    return missedAttacks;
+  }
 }
 
 const playerBoard = new gameBoard();
