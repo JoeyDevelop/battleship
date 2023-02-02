@@ -2,6 +2,7 @@ class gameBoard {
   constructor() {
     this.gameBoardArray = this.createGameBoard();
     this.missedAttacks = [];
+    this.ships = [];
   }
   createGameBoard() {
     let array = [];
@@ -38,6 +39,7 @@ class gameBoard {
     if (this.checkValidMove(x, y, ship.length) === false) {
       return false;
     }
+    this.ships.push(ship);
     let shipPlaces = [];
 
     // Find correct object in gameBoardArray
@@ -64,6 +66,24 @@ class gameBoard {
       }
     }
     return shipPlaces;
+  }
+
+  receiveAttack(x, y) {
+    // If there is ship at coord, run hit function on ship
+    if (this.gameBoardArray[x - 1][y - 1].shipName !== undefined) {
+      let returnShip;
+      this.ships.forEach((ship) => {
+        if (ship.name === this.gameBoardArray[x - 1][y - 1].shipName) {
+          ship.hit();
+          returnShip = ship;
+        }
+      });
+      return returnShip.hits;
+      // Else add missed shot to missed attacks array;
+    } else if (this.gameBoardArray[x - 1][y - 1].shipName === undefined) {
+      this.missedAttacks.push(this.gameBoardArray[x - 1][y - 1]);
+      return "Miss!";
+    }
   }
 }
 

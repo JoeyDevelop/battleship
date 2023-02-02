@@ -19,13 +19,26 @@ test("Return false because move is invalid", () => {
   expect(playerBoard.placeShip(1, 6, { length: 5 })).toStrictEqual(false);
 });
 
-// test("Return array of places occupied by new ship", () => {
-//   expect(playerBoard.placeShip(1, 6, testShip)).toStrictEqual(false);
-// });
-
 test("Return array of places occupied by new ship", () => {
   expect(playerBoard.placeShip(1, 6, testShip)).toStrictEqual([
     { col: 6, row: [1], shipIndex: undefined, shipName: "Boat" },
     { col: 6, row: [2], shipIndex: undefined, shipName: "Boat" },
   ]);
+});
+
+// playerBoard.receiveAttack tests
+test("Return ship.hits", () => {
+  expect(playerBoard.receiveAttack(1, 6)).toStrictEqual(1);
+});
+
+test("Return ship.hits", () => {
+  expect(playerBoard.receiveAttack(2, 6)).toStrictEqual(2);
+});
+
+test("Return Miss! if attack fails", () => {
+  expect(playerBoard.receiveAttack(4, 7)).toStrictEqual("Miss!");
+});
+
+test("Return Miss! if attack fails", () => {
+  expect(playerBoard.receiveAttack(3, 6)).toStrictEqual("Miss!");
 });
