@@ -7,16 +7,18 @@ class gameBoard {
   createGameBoard() {
     let array = [];
     let arrayItem = [];
+    let row = 1;
     for (let i = 1; i < 11; i++) {
       let col = 1;
       for (let j = 1; j < 11; j++) {
         arrayItem.push({
-          row: [i],
+          row: row,
           col: col++,
           shipName: undefined,
           shipIndex: undefined,
         });
       }
+      row++;
       array.push(arrayItem);
       arrayItem = [];
     }
@@ -28,7 +30,7 @@ class gameBoard {
   }
 
   checkValidMove(x, y, length) {
-    if (x < 1 || x > 10 || y < 1 || y + length > 10) {
+    if (x < 1 || x + length > 10 || y < 1 || y > 10) {
       return false;
     } else if (this.gameBoardArray[x - 1][y - 1].shipName !== undefined) {
       return false;
@@ -43,30 +45,57 @@ class gameBoard {
     let shipPlaces = [];
 
     // Find correct object in gameBoardArray
-    const row = this.gameBoardArray.at(x - 1);
-    const column = row.at(y - 1);
-    const index = this.gameBoardArray.indexOf(column);
-    column.shipName = ship.name;
-
-    // Reassign gameBoardArray object
-    this.gameBoardArray[index] = column;
+    this.gameBoardArray[x - 1][y - 1].shipName = ship.name;
 
     //Push new objects to return array
-    shipPlaces.push(this.gameBoardArray[index]);
+    shipPlaces.push(this.gameBoardArray[x - 1][y - 1]);
+
+    // console.log(this.gameBoardArray[x - 1][y - 1]);
+    // console.log(this.gameBoardArray[x - 1 + 1][y - 1]);
+    // console.log(this.gameBoardArray[x - 1 + 2][y - 1]);
 
     // Repeat if ship length is > 1;
     if (ship.length > 1) {
       for (let i = 1; i < ship.length; i++) {
-        const row = this.gameBoardArray.at(x - 1 + [i]);
-        const column = row.at(y - 1);
-        const index = this.gameBoardArray.indexOf(column);
-        column.shipName = ship.name;
-        this.gameBoardArray[index] = column;
-        shipPlaces.push(this.gameBoardArray[index]);
+        this.gameBoardArray[x - 1 + [i][0]][y - 1].shipName = ship.name;
+        shipPlaces.push(this.gameBoardArray[x - 1][y - 1]);
       }
     }
     return shipPlaces;
   }
+
+  // placeShip(x, y, ship) {
+  //   if (this.checkValidMove(x, y, ship.length) === false) {
+  //     return false;
+  //   }
+  //   this.ships.push(ship);
+  //   let shipPlaces = []; b
+
+  //   // Find correct object in gameBoardArray
+  //   const row = this.gameBoardArray.at(x - 1);
+  //   const column = row.at(y - 1);
+  //   const index = this.gameBoardArray.indexOf(column);
+  //   column.shipName = ship.name;
+
+  //   // Reassign gameBoardArray object
+  //   this.gameBoardArray[index] = column;
+
+  //   //Push new objects to return array
+  //   shipPlaces.push(this.gameBoardArray[index]);
+
+  //   // Repeat if ship length is > 1;
+  //   if (ship.length > 1) {
+  //     for (let i = 1; i < ship.length; i++) {
+  //       const row = this.gameBoardArray.at(x - 1 + [i]);
+  //       const column = row.at(y - 1);
+  //       const index = this.gameBoardArray.indexOf(column);
+  //       column.shipName = ship.name;
+  //       this.gameBoardArray[index] = column;
+  //       shipPlaces.push(this.gameBoardArray[index]);
+  //     }
+  //   }
+  //   return shipPlaces;
+  // }
 
   receiveAttack(x, y) {
     // If there is ship at coord, run hit function on ship
@@ -109,6 +138,4 @@ class gameBoard {
   }
 }
 
-const playerBoard = new gameBoard();
-
-export default playerBoard;
+export default gameBoard;
