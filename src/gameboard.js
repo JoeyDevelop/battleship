@@ -30,9 +30,9 @@ class gameBoard {
   checkValidMove(x, y, length) {
     if (x < 1 || x > 10 || y < 1 || y + length > 10) {
       return false;
-    } else {
-      return true;
-    }
+    } else if (this.gameBoardArray[x - 1][y - 1].shipName !== undefined) {
+      return false;
+    } else return true;
   }
 
   placeShip(x, y, ship) {
@@ -94,6 +94,18 @@ class gameBoard {
       missedAttacks.push(coord);
     });
     return missedAttacks;
+  }
+
+  allShipsSunk() {
+    let arr = [];
+    this.ships.forEach((ship) => {
+      if (ship.sunk === true) {
+        arr.push(ship);
+      }
+    });
+    if (this.ships.length === arr.length) {
+      return true;
+    } else return false;
   }
 }
 

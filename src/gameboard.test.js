@@ -15,6 +15,7 @@ test("Return false because move is invalid", () => {
 
 // playerBoard.placeShip tests
 const testShip = new Ship(2, "Boat");
+const canoe = new Ship(1, "Canoe");
 test("Return false because move is invalid", () => {
   expect(playerBoard.placeShip(1, 6, { length: 5 })).toStrictEqual(false);
 });
@@ -41,4 +42,35 @@ test("Return Miss! if attack fails", () => {
 
 test("Return Miss! if attack fails", () => {
   expect(playerBoard.receiveAttack(3, 6)).toStrictEqual("Miss!");
+});
+
+//playerBoard.allShipsSunk() tests
+test("Return true if all ships are sunk", () => {
+  expect(playerBoard.allShipsSunk()).toStrictEqual(true);
+});
+
+// Adding ship to test other return
+test("Return newly occupied spaces", () => {
+  expect(playerBoard.placeShip(1, 1, canoe)).toStrictEqual([
+    {
+      col: 1,
+      row: [1],
+      shipIndex: undefined,
+      shipName: "Canoe",
+    },
+  ]);
+});
+
+test("Return false if any ships are still floating", () => {
+  expect(playerBoard.allShipsSunk()).toStrictEqual(false);
+});
+
+// playerBoard.checkValidMove and .placeShip further tests
+
+test("Return false if coordinate is already occupied", () => {
+  expect(playerBoard.placeShip(1, 1, testShip)).toStrictEqual(false);
+});
+
+test("Return false if move is invalid", () => {
+  expect(playerBoard.checkValidMove(2, 6, canoe)).toStrictEqual(false);
 });
