@@ -1,6 +1,7 @@
 import gameBoard from "./gameboard";
 // import createPlayer from "./player";
 import ship from "./ship";
+import Dom from "./dom";
 
 function playGame() {
   // define all main variables
@@ -13,6 +14,7 @@ function playGame() {
   const destroyer = new ship(2, "Destroyer");
   const playerBoard = new gameBoard();
   const compBoard = new gameBoard();
+  const dom = new Dom();
 
   //place ships on both boards
   playerBoard.placeShip(2, 4, carrier);
@@ -26,6 +28,8 @@ function playGame() {
   compBoard.placeShip(5, 5, cruiser);
   compBoard.placeShip(5, 9, submarine);
   compBoard.placeShip(1, 1, destroyer);
+
+  dom.addTiles(playerBoard.getGameBoard(), compBoard.getGameBoard());
 }
 
 playGame();
