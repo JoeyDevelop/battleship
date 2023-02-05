@@ -30,7 +30,7 @@ class gameBoard {
   }
 
   checkValidMove(x, y, length) {
-    if (x < 1 || x + length > 10 || y < 1 || y > 10) {
+    if (x < 1 || x + length > 11 || y < 1 || y > 10) {
       return false;
     } else if (this.gameBoardArray[x - 1][y - 1].shipName !== undefined) {
       return false;
