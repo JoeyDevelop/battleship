@@ -69,7 +69,7 @@ class Dom {
             if (row == elRow && col == elCol) {
               tile.setAttribute("shipName", element.shipName);
               tile.classList.add("ship");
-              console.log(tile);
+              // console.log(tile);
             }
           });
         }
@@ -91,7 +91,7 @@ class Dom {
               tile.setAttribute("shipName", element.shipName);
               // These ships will not be shown in final product
               tile.classList.add("ship");
-              console.log(tile);
+              // console.log(tile);
             }
           });
         }

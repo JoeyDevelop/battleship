@@ -77,7 +77,6 @@ body {
 .content {
   height: 82vh;
   width: 100vw;
-  border: 4px dotted red;
 }
 
 .gameboard {
@@ -89,7 +88,8 @@ body {
   min-width: 500px;
   max-width: 500px;
   max-height: 500px;
-  border: 4px dotted red;
+  border: 10px solid black;
+  border-radius: 10px;
 }
 
 .tile {
@@ -100,16 +100,24 @@ body {
   background-color: #3b14d9;
 }
 
+.tile:hover {
+  background-color: rgba(255, 255, 255, 0.661);
+}
+
+.hit {
+  background-color: rgb(159, 9, 9);
+}
+
+.miss {
+  background-color: rgb(255, 255, 255);
+}
+
 .side {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
-}
-
-.tile:hover {
-  background-color: white;
 }
 
 .ship {

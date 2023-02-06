@@ -31,6 +31,49 @@ function playGame() {
 
   dom.addTiles(playerBoard.getGameBoard(), compBoard.getGameBoard());
   dom.addShips(playerBoard.getGameBoard(), compBoard.getGameBoard());
+
+  let playerName;
+  dom.compTiles.forEach((tile) => {
+    tile.addEventListener("click", () => {
+      round(tile.getAttribute("col"), tile.getAttribute("row"));
+    });
+  });
+  playerName = document.querySelector(".name");
+  ///////// Change to prompt for full game, currently set in code for convenience
+  // playerName.innerHTML = prompt("Enter player name");
+  playerName.innerHTML = "Joey";
+
+  function round(row, col) {
+    const attack = compBoard.receiveAttack(row, col);
+    if (attack == true) {
+      dom.compTiles.forEach((tile) => {
+        if (
+          tile.getAttribute("col") == row &&
+          tile.getAttribute("row") == col
+        ) {
+          tile.classList.add("hit");
+          tile.classList.remove("ship");
+        }
+      });
+    } else if (attack == false) {
+      dom.compTiles.forEach((tile) => {
+        if (
+          tile.getAttribute("col") == row &&
+          tile.getAttribute("row") == col
+        ) {
+          tile.classList.add("miss");
+          // tile.classList.remove("ship");
+        }
+      });
+    } else if (attack === "fail") {
+      return;
+    }
+
+    ///// This will end loop if player or computer wins (comp not implemented)
+    if (compBoard.allShipsSunk() === true) {
+      console.log("YOU WIN!");
+    }
+  }
 }
 
 playGame();

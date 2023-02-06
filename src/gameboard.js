@@ -2,6 +2,7 @@ class gameBoard {
   constructor() {
     this.gameBoardArray = this.createGameBoard();
     this.missedAttacks = [];
+    this.hitAttacks = [];
     this.ships = [];
   }
   createGameBoard() {
@@ -60,21 +61,40 @@ class gameBoard {
     return shipPlaces;
   }
 
+  checkValidAttack(x, y) {
+    // Checks that attack hasn't already been used
+    if (
+      this.hitAttacks.includes(this.gameBoardArray[x - 1][y - 1]) == true ||
+      this.missedAttacks.includes(this.gameBoardArray[x - 1][y - 1]) == true
+    ) {
+      return true;
+    }
+  }
+
   receiveAttack(x, y) {
+    if (this.checkValidAttack(x, y) === true) {
+      console.log("This target has already been hit!");
+      return "fail";
+    }
     // If there is ship at coord, run hit function on ship
     if (this.gameBoardArray[x - 1][y - 1].shipName !== undefined) {
-      let returnShip;
       this.ships.forEach((ship) => {
         if (ship.name === this.gameBoardArray[x - 1][y - 1].shipName) {
           ship.hit();
-          returnShip = ship;
+          // This logs to console if all ship parts are hit
+          if (ship.sunk === true) {
+            console.log("Ship sunk!");
+          }
+          this.hitAttacks.push(this.gameBoardArray[x - 1][y - 1]);
         }
       });
-      return returnShip.hits;
+      console.log(this.hitAttacks);
+      return true;
       // Else add missed shot to missed attacks array;
     } else if (this.gameBoardArray[x - 1][y - 1].shipName === undefined) {
       this.missedAttacks.push(this.gameBoardArray[x - 1][y - 1]);
-      return "Miss!";
+      console.log(this.missedAttacks);
+      return false;
     }
   }
 
