@@ -4,3 +4,8 @@ Need to do:
 
 - Let computer attack player
 - Implement alert if player picks same attack coordinate twice
+
+Note:
+
+- Some tests were broken after learning better return states
+- These methods now return much more helpful booleans, strings, etc.
