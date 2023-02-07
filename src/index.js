@@ -8,8 +8,7 @@ function playGame() {
 
   let playerName = document.querySelector(".name");
   // Prompt for player name
-  // playerName.innerHTML = prompt("Enter player name");
-  playerName.innerHTML = "Joey";
+  playerName.innerHTML = prompt("Enter player name");
   const computer = new createPlayer("Computer");
   const carrier = new ship(5, "Carrier");
   const battleship = new ship(4, "Battleship");
