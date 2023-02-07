@@ -2,8 +2,10 @@ function createPlayer(name) {
   return {
     name: name,
     //computer methods
-    makeRandomMove() {
-      console.log("hey");
+    makeRandomAttack() {
+      const m = Math.floor(Math.random() * 10 + 1);
+      console.log(m);
+      return m;
     },
   };
 }

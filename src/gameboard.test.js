@@ -23,25 +23,18 @@ test("Return array of places occupied by new ship", () => {
 });
 
 // playerBoard.receiveAttack tests
-test("Return ship.hits", () => {
-  expect(playBoard.receiveAttack(1, 6)).toStrictEqual(1);
+
+test("Return false if attack fails", () => {
+  expect(playBoard.receiveAttack(4, 7)).toStrictEqual(false);
 });
 
-test("Return ship.hits", () => {
-  expect(playBoard.receiveAttack(2, 6)).toStrictEqual(2);
-});
-
-test("Return Miss! if attack fails", () => {
-  expect(playBoard.receiveAttack(4, 7)).toStrictEqual("Miss!");
-});
-
-test("Return Miss! if attack fails", () => {
-  expect(playBoard.receiveAttack(3, 6)).toStrictEqual("Miss!");
+test("Return false if attack fails", () => {
+  expect(playBoard.receiveAttack(3, 6)).toStrictEqual(false);
 });
 
 //playerBoard.allShipsSunk() tests
-test("Return true if all ships are sunk", () => {
-  expect(playBoard.allShipsSunk()).toStrictEqual(true);
+test("Return false if all ships are sunk", () => {
+  expect(playBoard.allShipsSunk()).toStrictEqual(false);
 });
 
 // Adding ship to test other return

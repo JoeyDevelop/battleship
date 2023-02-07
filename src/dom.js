@@ -12,20 +12,8 @@ class Dom {
       element.forEach((element) => {
         const tile = document.createElement("div");
         tile.classList.add("tile");
-        ///////////
         tile.setAttribute("row", element.col);
         tile.setAttribute("col", element.row);
-        tile.addEventListener("click", () => {
-          alert(
-            "row: " +
-              tile.getAttribute("col") +
-              " col: " +
-              tile.getAttribute("row") +
-              " shipName: " +
-              tile.getAttribute("shipName")
-          );
-          // console.log(this.playerTiles);
-        });
         playerBoard.appendChild(tile);
         this.playerTiles.push(tile);
       });
@@ -37,17 +25,6 @@ class Dom {
         tile.classList.add("tile");
         tile.setAttribute("col", element.row);
         tile.setAttribute("row", element.col);
-        tile.addEventListener("click", () => {
-          alert(
-            "row: " +
-              tile.getAttribute("col") +
-              " col: " +
-              tile.getAttribute("row") +
-              " shipName: " +
-              tile.getAttribute("shipName")
-          );
-          // console.log(this.compTiles);
-        });
         compBoard.appendChild(tile);
         this.compTiles.push(tile);
       });
@@ -90,7 +67,7 @@ class Dom {
             if (row == elRow && col == elCol) {
               tile.setAttribute("shipName", element.shipName);
               // These ships will not be shown in final product
-              tile.classList.add("ship");
+              // tile.classList.add("ship");
               // console.log(tile);
             }
           });
@@ -99,13 +76,5 @@ class Dom {
     });
   }
 }
-// Working method to access correct tile
-// this.compTiles.forEach((tile) => {
-//   const row = tile.getAttribute("row");
-//   const col = tile.getAttribute("col");
-//   if (row == 1 && col == 4) {
-//     console.log("yes");
-//   }
-// });
 
 export default Dom;

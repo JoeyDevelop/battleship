@@ -73,7 +73,6 @@ class gameBoard {
 
   receiveAttack(x, y) {
     if (this.checkValidAttack(x, y) === true) {
-      console.log("This target has already been hit!");
       return "fail";
     }
     // If there is ship at coord, run hit function on ship
@@ -83,7 +82,7 @@ class gameBoard {
           ship.hit();
           // This logs to console if all ship parts are hit
           if (ship.sunk === true) {
-            console.log("Ship sunk!");
+            alert("Ship sunk!");
           }
           this.hitAttacks.push(this.gameBoardArray[x - 1][y - 1]);
         }
