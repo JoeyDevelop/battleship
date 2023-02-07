@@ -4,3 +4,5 @@ Need to do:
 
 - Make computer smarter
 - Implement way for player to place ships
+
+* Randomize computer ship placements
